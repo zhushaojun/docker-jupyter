@@ -4,6 +4,7 @@ py_versions=(3.7 3.8 3.9)
 # cuda_version=(11.4.2-cudnn8-runtime-ubuntu20.04
 # https://hub.docker.com/r/nvidia/cuda/tags
 
+# gpu notebook
 for py in 3.7 3.8 3.9
 do
 	image=cuda-scipy:$py
@@ -11,10 +12,22 @@ do
 	docker tag $image zhushaojun/$image
 	docker push zhushaojun/$image
 
-	for i in auto-sklearn mxnet pycaret pytorch tensorflow
+	for image_name in mxnet pytorch tensorflow
 	do
-		docker build --build-arg BASE_CONTAINER=$image --tag $i:$py ./$i
-		docker tag $i:$py zhushaojun/$i:$py
-		docker push zhushaojun/$i:$py
+		date=$(date '+%Y%m%d-%H:%M:%S')
+		tagname=$image_name:$py
+		docker build --build-arg BASE_CONTAINER=$image --tag $tagname ./$image_name
+		docker tag $tagname zhushaojun/$tagname
+		docker push zhushaojun/$tagname
 	done
+done
+
+# cpu notebook
+for image_name in auto-sklearn pycaret
+do
+	date=$(date '+%Y%m%d-%H:%M:%S')
+	tagname=$image_name:$date
+	docker build --tag $tagname ./$image_name
+	docker tag $tagname zhushaojun/$tagname
+	docker push zhushaojun/$tagname
 done
