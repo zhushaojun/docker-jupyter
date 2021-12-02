@@ -119,7 +119,7 @@ RUN set -x && \
     wget --quiet "${CONDA_MIRROR}/${miniforge_installer}" && \
     /bin/bash "${miniforge_installer}" -f -b -p "${CONDA_DIR}" && \
     rm "${miniforge_installer}" && \
-    mamba install python=${PYTHON_VERSION} --quiet --yes && \
+    # mamba install python=${PYTHON_VERSION} --quiet --yes && \
     # Conda configuration see https://conda.io/projects/conda/en/latest/configuration.html
     conda config --system --set auto_update_conda false && \
     conda config --system --set show_channel_urls true && \
