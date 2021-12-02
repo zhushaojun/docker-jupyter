@@ -16,7 +16,8 @@ RUN mamba install --quiet --yes -c pytorch -c fastchan \
     'fastai' \
     'cudatoolkit=10.2' && \
     mamba clean --all -f -y && \
+    pip config set global.index-url https://mirrors.aliyun.com/pypi/simple/ && \
     pip install pytorch-lightning  --no-cache-dir && \
-    rm -fr ~/.cache && \
+    rm -fr ~/.cache/pip && \
     fix-permissions "${CONDA_DIR}" && \
     fix-permissions "/home/${NB_USER}"

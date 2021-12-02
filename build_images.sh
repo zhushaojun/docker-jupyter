@@ -7,6 +7,8 @@ py_versions=(3.7 3.8 3.9)
 chmod +x scipy/*.sh
 chmod +x scipy/fix-permissions
 
+docker system prune -y
+
 # gpu notebook
 for py in 3.7 3.8 3.9
 do
