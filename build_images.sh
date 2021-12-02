@@ -4,6 +4,9 @@ py_versions=(3.7 3.8 3.9)
 # cuda_version=(11.4.2-cudnn8-runtime-ubuntu20.04
 # https://hub.docker.com/r/nvidia/cuda/tags
 
+chmod +x scipy/*.sh
+chmod +x scipy/fix-permissions
+
 # gpu notebook
 for py in 3.7 3.8 3.9
 do
