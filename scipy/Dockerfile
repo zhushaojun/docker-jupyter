@@ -123,6 +123,9 @@ RUN set -x && \
     # Conda configuration see https://conda.io/projects/conda/en/latest/configuration.html
     conda config --system --set auto_update_conda false && \
     conda config --system --set show_channel_urls true && \
+    conda config --add channels defaults && \
+    conda config --add channels anaconda && \
+    conda config --add channels conda-forge && \
     if [[ "${PYTHON_VERSION}" != "default" ]]; then mamba install --quiet --yes python="${PYTHON_VERSION}"; fi && \
     mamba list python | grep '^python ' | tr -s ' ' | cut -d ' ' -f 1,2 >> "${CONDA_DIR}/conda-meta/pinned" && \
     # Using conda to update all packages: https://github.com/mamba-org/mamba/issues/1092

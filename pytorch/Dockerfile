@@ -8,11 +8,12 @@ FROM ${BASE_CONTAINER}
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 # Install pytorch
-RUN mamba install --quiet --yes -c pytorch \
+RUN mamba install --quiet --yes -c pytorch -c fastchan \
     'pytorch' \
     'torchvision' \
     'torchaudio' \
     'torchtext' \
+    'fastai' \
     'cudatoolkit=10.2' && \
     mamba clean --all -f -y && \
     pip install pytorch-lightning  --no-cache-dir && \
