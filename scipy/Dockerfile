@@ -22,7 +22,8 @@ USER root
 # Install tini: init for containers
 ENV DEBIAN_FRONTEND noninteractive
 
-RUN apt-get update --yes && \
+RUN sed -i 's/archive.ubuntu.com/mirrors.aliyun.com/g' /etc/apt/sources.list && \
+    apt-get update --yes && \
     apt-get install --yes --no-install-recommends \
     tini \
     wget \
