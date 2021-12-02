@@ -106,6 +106,8 @@ WORKDIR /tmp
 # ARG CONDA_MIRROR=https://github.com/conda-forge/miniforge/releases/latest/download
 ARG CONDA_MIRROR=https://mirrors.tuna.tsinghua.edu.cn/github-release/conda-forge/miniforge/LatestRelease
 
+COPY .condarc ~/
+
 # ---- Miniforge installer ----
 # Check https://github.com/conda-forge/miniforge/releases
 # Package Manager and Python implementation to use (https://github.com/conda-forge/miniforge)
@@ -120,13 +122,9 @@ RUN set -x && \
     wget --quiet "${CONDA_MIRROR}/${miniforge_installer}" && \
     /bin/bash "${miniforge_installer}" -f -b -p "${CONDA_DIR}" && \
     rm "${miniforge_installer}" && \
-    # mamba install python=${PYTHON_VERSION} --quiet --yes && \
     # Conda configuration see https://conda.io/projects/conda/en/latest/configuration.html
     conda config --system --set auto_update_conda false && \
     conda config --system --set show_channel_urls true && \
-    conda config --add channels defaults && \
-    conda config --add channels anaconda && \
-    conda config --add channels conda-forge && \
     if [[ "${PYTHON_VERSION}" != "default" ]]; then mamba install --quiet --yes python="${PYTHON_VERSION}"; fi && \
     mamba list python | grep '^python ' | tr -s ' ' | cut -d ' ' -f 1,2 >> "${CONDA_DIR}/conda-meta/pinned" && \
     # Using conda to update all packages: https://github.com/mamba-org/mamba/issues/1092
