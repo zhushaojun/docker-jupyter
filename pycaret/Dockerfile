@@ -6,8 +6,7 @@ FROM jupyter/scipy-notebook
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 # Install pycaret
-RUN pip config set global.index-url https://mirrors.aliyun.com/pypi/simple/ && \
-    pip install pycaret[full]  --no-cache-dir && \
+RUN pip install pycaret[full]  --no-cache-dir && \
     rm -fr ~/.cache/pip && \
     fix-permissions "${CONDA_DIR}" && \
     fix-permissions "/home/${NB_USER}"

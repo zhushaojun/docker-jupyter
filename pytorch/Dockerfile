@@ -8,7 +8,7 @@ FROM ${BASE_CONTAINER}
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 # Install pytorch
-RUN mamba install --quiet --yes -c pytorch -c fastchan \
+RUN mamba install  --yes -c pytorch -c fastai \
     'pytorch' \
     'torchvision' \
     'torchaudio' \
@@ -16,7 +16,6 @@ RUN mamba install --quiet --yes -c pytorch -c fastchan \
     'fastai' \
     'cudatoolkit=10.2' && \
     mamba clean --all -f -y && \
-    pip config set global.index-url https://mirrors.aliyun.com/pypi/simple/ && \
     pip install pytorch-lightning  --no-cache-dir && \
     rm -fr ~/.cache/pip && \
     fix-permissions "${CONDA_DIR}" && \

@@ -106,7 +106,7 @@ WORKDIR /tmp
 # ARG CONDA_MIRROR=https://github.com/conda-forge/miniforge/releases/latest/download
 ARG CONDA_MIRROR=https://mirrors.tuna.tsinghua.edu.cn/github-release/conda-forge/miniforge/LatestRelease
 
-COPY .condarc ~/
+COPY .condarc /home/${NB_USER}/
 
 # ---- Miniforge installer ----
 # Check https://github.com/conda-forge/miniforge/releases
@@ -131,6 +131,7 @@ RUN set -x && \
     conda update --all --quiet --yes && \
     conda clean --all -f -y && \
     rm -rf "/home/${NB_USER}/.cache/yarn" && \
+    pip config set global.index-url https://mirrors.aliyun.com/pypi/simple/ && \
     fix-permissions "${CONDA_DIR}" && \
     fix-permissions "/home/${NB_USER}"
 
