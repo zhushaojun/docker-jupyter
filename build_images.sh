@@ -9,10 +9,12 @@ chmod +x scipy/fix-permissions
 
 docker system prune -y
 
+#date=$(date '+%Y%m%d-%H%M%S')
+date=$(date '+%Y%m%d')
 # gpu notebook
 for py in 3.7 3.8 3.9
 do
-	image=cuda-scipy:$py
+	image=cuda-scipy:$py-$date
 	docker build --build-arg PYTHON_VERSION=$py --tag $image ./scipy
 	docker tag $image zhushaojun/$image
 	docker push zhushaojun/$image
@@ -20,7 +22,7 @@ do
 	for image_name in mxnet pytorch tensorflow
 	do
 		date=$(date '+%Y%m%d-%H%M%S')
-		tagname=$image_name:$py
+		tagname=$image_name:$py-$date
 		docker build --build-arg BASE_CONTAINER=$image --tag $tagname ./$image_name
 		docker tag $tagname zhushaojun/$tagname
 		docker push zhushaojun/$tagname

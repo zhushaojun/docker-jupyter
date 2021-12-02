@@ -7,11 +7,14 @@ FROM ${BASE_CONTAINER}
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 # Install mxnet and autogluon
-RUN mamba install --quiet --yes \
+RUN mamba install --quiet --yes -c pytorch \
+    'pytorch' \
+    'torchvision' \
     'cudatoolkit=10.2' \
     mamba clean --all -f -y && \
     pip config set global.index-url https://mirrors.aliyun.com/pypi/simple/ && \
-    pip install mxnet-cu102==1.7.0 autogluon --no-cache-dir && \
+    pip install mxnet-cu102==1.7.0 --no-cache-dir && \
+    pip install autogluon --no-cache-dir && \
     rm -fr ~/.cache/pip && \
     fix-permissions "${CONDA_DIR}" && \
     fix-permissions "/home/${NB_USER}"
