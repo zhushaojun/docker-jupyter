@@ -23,6 +23,10 @@ cpu_base=ubuntu:20.04
 gpu_base=nvidia/cuda:11.4.2-cudnn8-runtime-ubuntu20.04
 
 build_and_push() {
+	echo $1
+	echo $2
+	echo $3
+	echo $4
 	docker build --build-arg PYTHON_VERSION=$1 BASE_CONTAINER=$2 --tag $3 ./$4
 	tag_and_push_image $3
 }
