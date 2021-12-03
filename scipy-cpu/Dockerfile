@@ -96,7 +96,7 @@ ARG PYTHON_VERSION=default
 
 # Setup work directory for backward-compatibility
 RUN mkdir "/home/${NB_USER}/work" && \
-    mkdir "/home/${NB_USER}.config/pip" && \
+    mkdir -p "/home/${NB_USER}/.config/pip" && \
     fix-permissions "/home/${NB_USER}"
 
 COPY --chown=${NB_UID}:${NB_GID} .condarc /home/${NB_USER}/
