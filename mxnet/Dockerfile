@@ -10,7 +10,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN mamba install --yes -c pytorch \
     'pytorch' \
     'torchvision' \
-    'cudatoolkit=10.2' \
+    'cudatoolkit=10.2' && \
     mamba clean --all -f -y && \
     pip install mxnet-cu102==1.7.0 --no-cache-dir && \
     pip install autogluon --no-cache-dir && \
