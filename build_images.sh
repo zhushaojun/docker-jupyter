@@ -30,7 +30,7 @@ do
 	base_image_name=scipy-cpu
 	base_image_tag=zhushaojun/$base_image_name:py$py
 	docker build --build-arg PYTHON_VERSION=$py --tag $base_image_tag ./$base_image_name
-	tag_and_push_image $base_image_tag
+	# tag_and_push_image $base_image_tag
 
 	for image_name in pycaret auto-sklearn
 	do
