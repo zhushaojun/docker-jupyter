@@ -7,7 +7,9 @@ FROM ${BASE_CONTAINER}
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 # Install pycaret
-RUN pip install pycaret[full]  --no-cache-dir && \
+RUN mamba install --yes -c conda-forge \
+    gxx_linux-64 gcc_linux-64 && \
+    pip install pycaret[full]  --no-cache-dir && \
     rm -fr ~/.cache/pip && \
     fix-permissions "${CONDA_DIR}" && \
     fix-permissions "/home/${NB_USER}"

@@ -32,7 +32,7 @@ do
 	docker build --build-arg PYTHON_VERSION=$py --tag $base_image_tag ./$base_image_name
 	tag_and_push_image $base_image_tag
 
-	for image_name in auto-sklearn pycaret
+	for image_name in pycaret auto-sklearn
 	do
 		tagname=zhushaojun/$image_name:py$py
 		docker build --build-arg BASE_CONTAINER=$base_image_tag --tag $tagname ./$image_name
