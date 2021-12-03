@@ -3,8 +3,13 @@
 # cuda_version=(11.4.2-cudnn8-runtime-ubuntu20.04
 # https://hub.docker.com/r/nvidia/cuda/tags
 
-chmod +x scipy/*.sh
-chmod +x scipy/fix-permissions
+chmod +x scipy-cpu/*.sh
+chmod +x scipy-cpu/fix-permissions
+chmod 777 scipy-cpu/.condarc
+chmod +x scipy-gpu/*.sh
+chmod +x scipy-gpu/fix-permissions
+chmod 777 scipy-gpu/.condarc
+
 
 #date=$(date '+%Y%m%d-%H%M%S')
 date=$(date '+%Y%m%d')
