@@ -1,7 +1,7 @@
 # Copyright (c) Jupyter Development Team.
 # Distributed under the terms of the Modified BSD License.
-ARG BASE_CONTAINER
-FROM ${BASE_CONTAINER}
+ARG ROOT_CONTAINER
+FROM ${ROOT_CONTAINER}
 
 
 # Fix DL4006
