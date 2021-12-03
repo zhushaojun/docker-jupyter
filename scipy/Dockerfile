@@ -125,10 +125,10 @@ RUN set -x && \
     # Conda configuration see https://conda.io/projects/conda/en/latest/configuration.html
     conda config --system --set auto_update_conda false && \
     conda config --system --set show_channel_urls true && \
-    if [[ "${PYTHON_VERSION}" != "default" ]]; then mamba install --quiet --yes python="${PYTHON_VERSION}"; fi && \
+    if [[ "${PYTHON_VERSION}" != "default" ]]; then mamba install --yes python="${PYTHON_VERSION}"; fi && \
     mamba list python | grep '^python ' | tr -s ' ' | cut -d ' ' -f 1,2 >> "${CONDA_DIR}/conda-meta/pinned" && \
     # Using conda to update all packages: https://github.com/mamba-org/mamba/issues/1092
-    conda update --all --quiet --yes && \
+    conda update --all --yes && \
     conda clean --all -f -y && \
     rm -rf "/home/${NB_USER}/.cache/yarn" && \
     pip config set global.index-url https://mirrors.aliyun.com/pypi/simple/ && \
@@ -141,7 +141,7 @@ RUN set -x && \
 # Correct permissions
 # Do all this in a single RUN command to avoid duplicating all of the
 # files across image layers when the permissions change
-RUN mamba install --quiet --yes \
+RUN mamba install --yes \
     'notebook' \
     'jupyterhub' \
     'jupyterlab' \

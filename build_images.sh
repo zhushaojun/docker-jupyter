@@ -21,7 +21,6 @@ do
 
 	for image_name in mxnet pytorch tensorflow
 	do
-		date=$(date '+%Y%m%d-%H%M%S')
 		tagname=$image_name:$py-$date
 		docker build --build-arg BASE_CONTAINER=$image --tag $tagname ./$image_name
 		docker tag $tagname zhushaojun/$tagname
@@ -32,7 +31,6 @@ done
 # cpu notebook
 for image_name in auto-sklearn pycaret
 do
-	date=$(date '+%Y%m%d-%H%M%S')
 	tagname=$image_name:$date
 	docker build --tag $tagname ./$image_name
 	docker tag $tagname zhushaojun/$tagname
