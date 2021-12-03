@@ -14,25 +14,22 @@ date=$(date '+%Y%m%d')
 # gpu notebook
 for py in 3.7 3.8 3.9
 do
-	image=cuda-scipy:$py-$date
-	docker build --build-arg PYTHON_VERSION=$py --tag $image ./scipy
-	docker tag $image zhushaojun/$image
-	docker push zhushaojun/$image
+	base_image_tag=zhushaojun/cuda-scipy:$py-$date
+	docker build --build-arg PYTHON_VERSION=$py --tag $base_image_tag ./scipy
+	docker push $base_image_tag
 
 	for image_name in mxnet pytorch tensorflow
 	do
-		tagname=$image_name:$py-$date
+		tagname=zhushaojun/$image_name:$py-$date
 		docker build --build-arg BASE_CONTAINER=$image --tag $tagname ./$image_name
-		docker tag $tagname zhushaojun/$tagname
-		docker push zhushaojun/$tagname
+		docker push $tagname
 	done
 done
 
 # cpu notebook
 for image_name in auto-sklearn pycaret
 do
-	tagname=$image_name:$date
+	tagname=zhushaojun/$image_name:$date
 	docker build --tag $tagname ./$image_name
-	docker tag $tagname zhushaojun/$tagname
-	docker push zhushaojun/$tagname
+	docker push $tagname
 done
