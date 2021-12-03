@@ -93,7 +93,7 @@ RUN echo "auth requisite pam_deny.so" >> /etc/pam.d/su && \
 USER ${NB_UID}
 ARG PYTHON_VERSION=default
 
-COPY .condarc /home/${NB_USER}/
+COPY --chown=${NB_UID}:${NB_GID} .condarc /home/${NB_USER}/
 
 # Setup work directory for backward-compatibility
 RUN mkdir "/home/${NB_USER}/work" && \
@@ -173,6 +173,7 @@ RUN mamba install --yes \
     'statsmodels' \
     'sympy' \
     'widgetsnbextension'\
+    'scikit-learn-intelex' \
     'xlrd' && \
     mamba clean --all -f -y && \
     npm cache clean --force && \
@@ -205,6 +206,8 @@ CMD ["start-notebook.sh"]
 
 # Copy local files as late as possible to avoid cache busting
 COPY start.sh start-notebook.sh start-singleuser.sh /usr/local/bin/
+RUN chmod a+rx /usr/local/bin/start.sh /usr/local/bin/start-notebook.sh /usr/local/bin/start-singleuser.sh
+
 # Currently need to have both jupyter_notebook_config and jupyter_server_config to support classic and lab
 COPY jupyter_notebook_config.py /etc/jupyter/
 

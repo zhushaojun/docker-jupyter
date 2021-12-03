@@ -98,7 +98,7 @@ ARG PYTHON_VERSION=default
 RUN mkdir "/home/${NB_USER}/work" && \
     fix-permissions "/home/${NB_USER}"
 
-COPY .condarc /home/${NB_USER}/
+COPY --chown=${NB_UID}:${NB_GID} .condarc /home/${NB_USER}/
 
 # Install conda as jovyan and check the sha256 sum provided on the download site
 WORKDIR /tmp
@@ -108,7 +108,6 @@ WORKDIR /tmp
 # https://mirrors.tuna.tsinghua.edu.cn/github-release/conda-forge/miniforge/LatestRelease
 # ARG CONDA_MIRROR=https://github.com/conda-forge/miniforge/releases/latest/download
 ARG CONDA_MIRROR=https://mirrors.tuna.tsinghua.edu.cn/github-release/conda-forge/miniforge/LatestRelease
-
 
 # ---- Miniforge installer ----
 # Check https://github.com/conda-forge/miniforge/releases
@@ -174,6 +173,7 @@ RUN mamba install --yes \
     'statsmodels' \
     'sympy' \
     'widgetsnbextension'\
+    'scikit-learn-intelex' \
     'xlrd' && \
     mamba clean --all -f -y && \
     npm cache clean --force && \
@@ -206,6 +206,8 @@ CMD ["start-notebook.sh"]
 
 # Copy local files as late as possible to avoid cache busting
 COPY start.sh start-notebook.sh start-singleuser.sh /usr/local/bin/
+RUN chmod a+rx /usr/local/bin/start.sh /usr/local/bin/start-notebook.sh /usr/local/bin/start-singleuser.sh
+
 # Currently need to have both jupyter_notebook_config and jupyter_server_config to support classic and lab
 COPY jupyter_notebook_config.py /etc/jupyter/
 
