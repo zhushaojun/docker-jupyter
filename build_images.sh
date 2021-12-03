@@ -4,6 +4,7 @@
 # https://hub.docker.com/r/nvidia/cuda/tags
 
 chmod +x scipy/*.sh
+chmod +x scipy/fix-permissions
 
 #date=$(date '+%Y%m%d-%H%M%S')
 date=$(date '+%Y%m%d')
