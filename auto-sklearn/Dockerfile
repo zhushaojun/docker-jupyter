@@ -7,9 +7,7 @@ FROM ${BASE_CONTAINER}
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 # Install auto-sklearn
-RUN mamba install --quiet --yes -c conda-forge \
-    'gcc_linux-64' \
-    'swig' \
+RUN mamba install --yes -c conda-forge \
     'auto-sklearn' && \
     mamba clean --all -f -y && \
     fix-permissions "${CONDA_DIR}" && \
