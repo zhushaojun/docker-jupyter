@@ -27,7 +27,7 @@ build_and_push() {
 	echo $2
 	echo $3
 	echo $4
-	docker build --build-arg PYTHON_VERSION=$1 BASE_CONTAINER=$2 --tag $3 ./$4
+	docker build --build-arg PYTHON_VERSION=$1 --build-arg BASE_CONTAINER=$2 --tag $3 ./$4
 	tag_and_push_image $3
 }
 
