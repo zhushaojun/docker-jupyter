@@ -96,9 +96,11 @@ ARG PYTHON_VERSION=default
 
 # Setup work directory for backward-compatibility
 RUN mkdir "/home/${NB_USER}/work" && \
+    mkdir "/home/${NB_USER}.config/pip" && \
     fix-permissions "/home/${NB_USER}"
 
 COPY --chown=${NB_UID}:${NB_GID} .condarc /home/${NB_USER}/
+COPY --chown=${NB_UID}:${NB_GID} .condarc /home/${NB_USER}.config/pip/
 
 # Install conda as jovyan and check the sha256 sum provided on the download site
 WORKDIR /tmp
@@ -132,7 +134,7 @@ RUN set -x && \
     conda update --all --yes && \
     conda clean --all -f -y && \
     rm -rf "/home/${NB_USER}/.cache/yarn" && \
-    pip config set global.index-url https://mirrors.aliyun.com/pypi/simple/ && \
+    # pip config set global.index-url https://mirrors.aliyun.com/pypi/simple/ && \
     fix-permissions "${CONDA_DIR}" && \
     fix-permissions "/home/${NB_USER}"
 
