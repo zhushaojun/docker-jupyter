@@ -3,8 +3,7 @@
 
 # Ubuntu 20.04 (focal)
 # https://hub.docker.com/_/ubuntu/?tab=tags&name=focal
-ARG ROOT_CONTAINER=ubuntu:20.04
-
+ARG ROOT_CONTAINER
 FROM $ROOT_CONTAINER
 
 LABEL maintainer="Jupyter Project <jupyter@googlegroups.com>"
@@ -134,7 +133,6 @@ RUN set -x && \
     conda update --all --yes && \
     conda clean --all -f -y && \
     rm -rf "/home/${NB_USER}/.cache/yarn" && \
-    # pip config set global.index-url https://mirrors.aliyun.com/pypi/simple/ && \
     fix-permissions "${CONDA_DIR}" && \
     fix-permissions "/home/${NB_USER}"
 
@@ -153,7 +151,7 @@ RUN mamba install --yes \
     'bokeh' \
     'bottleneck' \
     'cloudpickle' \
-    'conda-forge::blas=*=openblas' \
+    # 'conda-forge::blas=*=openblas' \
     'cython' \
     'dask' \
     'dill' \
