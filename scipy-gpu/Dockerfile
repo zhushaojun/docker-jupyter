@@ -93,6 +93,8 @@ RUN echo "auth requisite pam_deny.so" >> /etc/pam.d/su && \
 USER ${NB_UID}
 ARG PYTHON_VERSION=default
 
+COPY .condarc /home/${NB_USER}/
+
 # Setup work directory for backward-compatibility
 RUN mkdir "/home/${NB_USER}/work" && \
     fix-permissions "/home/${NB_USER}"
@@ -106,7 +108,6 @@ WORKDIR /tmp
 # ARG CONDA_MIRROR=https://github.com/conda-forge/miniforge/releases/latest/download
 ARG CONDA_MIRROR=https://mirrors.tuna.tsinghua.edu.cn/github-release/conda-forge/miniforge/LatestRelease
 
-COPY .condarc /home/${NB_USER}/
 
 # ---- Miniforge installer ----
 # Check https://github.com/conda-forge/miniforge/releases
