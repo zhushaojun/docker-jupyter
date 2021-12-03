@@ -21,7 +21,7 @@ do
 	for image_name in mxnet pytorch tensorflow
 	do
 		tagname=zhushaojun/$image_name:$py-$date
-		docker build --build-arg BASE_CONTAINER=$image --tag $tagname ./$image_name
+		docker build --build-arg BASE_CONTAINER=$base_image_tag --tag $tagname ./$image_name
 		docker push $tagname
 	done
 done
