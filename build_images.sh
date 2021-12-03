@@ -23,6 +23,7 @@ cpu_base=ubuntu:20.04
 gpu_base=nvidia/cuda:11.4.2-cudnn8-runtime-ubuntu20.04
 
 build_and_push() {
+	echo "---------Building with params----------"
 	echo $1
 	echo $2
 	echo $3
