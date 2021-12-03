@@ -8,8 +8,8 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 # Install pycaret
 RUN mamba install --yes -c conda-forge \
-    shap daal4py && \
-    pip install pycaret[full]  --no-cache-dir && \
+    shap && \
+    pip install daal4py pycaret[full]  --no-cache-dir && \
     rm -fr ~/.cache/pip && \
     fix-permissions "${CONDA_DIR}" && \
     fix-permissions "/home/${NB_USER}"
