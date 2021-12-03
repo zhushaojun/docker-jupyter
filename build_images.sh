@@ -20,6 +20,7 @@ tag_and_push_image() {
 	docker tag $1 zhushaojun/$1-$date
 	docker push zhushaojun/$1-$date
 
+	echo pushing $private_registry$1
 	docker tag $1 $private_registry$1
 	docker push $private_registry$1
 }
