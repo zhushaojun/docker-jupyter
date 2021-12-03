@@ -1,6 +1,7 @@
 # Copyright (c) Jupyter Development Team.
 # Distributed under the terms of the Modified BSD License.
-FROM jupyter/scipy-notebook
+ARG BASE_CONTAINER
+FROM ${BASE_CONTAINER}
 
 # Fix DL4006
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
