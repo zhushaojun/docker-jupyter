@@ -3,12 +3,10 @@
 # cuda_version=(11.4.2-cudnn8-runtime-ubuntu20.04
 # https://hub.docker.com/r/nvidia/cuda/tags
 
-# chmod +x scipy-cpu/*.sh
-# chmod +x scipy-cpu/fix-permissions
-# chmod 777 scipy-cpu/.condarc
-# chmod +x scipy-gpu/*.sh
-# chmod +x scipy-gpu/fix-permissions
-# chmod 777 scipy-gpu/.condarc
+chmod +x scipy-cpu/*.sh
+chmod +x scipy-cpu/fix-permissions
+chmod +x scipy-gpu/*.sh
+chmod +x scipy-gpu/fix-permissions
 
 
 #date=$(date '+%Y%m%d-%H%M%S')
@@ -16,7 +14,7 @@ date=$(date '+%Y%m%d')
 
 
 # cpu notebook
-for py in 3.7 3.8 3.9
+for py in 3.7 3.8 3.9 3.10
 do
 	base_image_name=scipy-cpu
 	base_image_tag=zhushaojun/$base_image_name:py$py
@@ -39,7 +37,7 @@ done
 
 
 # gpu notebook
-for py in 3.7 3.8 3.9
+for py in 3.7 3.8 3.9 3.10
 do
 	base_image_name=scipy-gpu
 	base_image_tag=zhushaojun/$base_image_name:py$py
