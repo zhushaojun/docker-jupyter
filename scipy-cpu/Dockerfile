@@ -100,7 +100,7 @@ RUN mkdir "/home/${NB_USER}/work" && \
     fix-permissions "/home/${NB_USER}"
 
 COPY --chown=${NB_UID}:${NB_GID} .condarc /home/${NB_USER}/
-COPY --chown=${NB_UID}:${NB_GID} .condarc /home/${NB_USER}.config/pip/
+COPY --chown=${NB_UID}:${NB_GID} pip.conf /home/${NB_USER}/.config/pip/
 
 # Install conda as jovyan and check the sha256 sum provided on the download site
 WORKDIR /tmp
