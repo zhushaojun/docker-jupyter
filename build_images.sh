@@ -23,36 +23,35 @@ tag_and_push_image() {
 	docker push $private_registry$1
 }
 
+cpu_base=ubuntu:20.04
+gpu_base=nvidia/cuda:11.4.2-cudnn8-runtime-ubuntu20.04
+
+build_and_push() {
+	docker build --build-arg PYTHON_VERSION=$1 BASE_CONTAINER=$2 --tag $3 ./$4
+	tag_and_push_image $3
+}
 
 # cpu notebook
-for py in 3.7 3.8 3.9 3.10
+for py in 3.7 3.8 3.9
 do
-	base_image_name=scipy-cpu
-	base_image_tag=zhushaojun/$base_image_name:py$py
-	docker build --build-arg PYTHON_VERSION=$py --tag $base_image_tag ./$base_image_name
-	# tag_and_push_image $base_image_tag
+	base_image_tag=zhushaojun/scipy:py$py-cpu
+	build_and_push $py $cpu_base $base_image_tag scipy
 
 	for image_name in pycaret auto-sklearn
 	do
-		tagname=zhushaojun/$image_name:py$py
-		docker build --build-arg BASE_CONTAINER=$base_image_tag --tag $tagname ./$image_name
-		tag_and_push_image $tagname
+		build_and_push $py $base_image_tag zhushaojun/$image_name:py$py-cpu $image_name
 	done
 done
 
 
 # gpu notebook
-for py in 3.7 3.8 3.9 3.10
+for py in 3.7 3.8 3.9
 do
-	base_image_name=scipy-gpu
-	base_image_tag=zhushaojun/$base_image_name:py$py
-	docker build --build-arg PYTHON_VERSION=$py --tag $base_image_tag ./$base_image_name
-	tag_and_push_image $base_image_tag
+	base_image_tag=zhushaojun/scipy:py$py-gpu
+	build_and_push $py $gpu_base $base_image_tag scipy
 
 	for image_name in mxnet pytorch tensorflow
 	do
-		tagname=zhushaojun/$image_name:py$py
-		docker build --build-arg BASE_CONTAINER=$base_image_tag --tag $tagname ./$image_name
-		tag_and_push_image $tagname
+		build_and_push $py $base_image_tag zhushaojun/$image_name:py$py-gpu $image_name
 	done
 done
