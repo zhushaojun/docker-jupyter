@@ -4,7 +4,7 @@
 # https://hub.docker.com/r/nvidia/cuda/tags
 
 #构建以前删除镜像
-docker image prune -a -y
+docker image prune -a -f
 
 chmod +x scipy/*.sh
 
@@ -33,19 +33,6 @@ build_and_push() {
 	tag_and_push_image $3
 }
 
-# cpu notebook
-for py in 3.7 3.8 3.9
-do
-	base_image_tag=zhushaojun/scipy:py$py-cpu
-	build_and_push $py $cpu_base $base_image_tag scipy
-
-	for image_name in pycaret auto-sklearn
-	do
-		build_and_push $py $base_image_tag zhushaojun/$image_name:py$py-cpu $image_name
-	done
-done
-
-
 # gpu notebook
 for py in 3.7 3.8 3.9
 do
@@ -55,5 +42,18 @@ do
 	for image_name in mxnet pytorch tensorflow
 	do
 		build_and_push $py $base_image_tag zhushaojun/$image_name:py$py-gpu $image_name
+	done
+done
+
+
+# cpu notebook
+for py in 3.7 3.8 3.9
+do
+	base_image_tag=zhushaojun/scipy:py$py-cpu
+	build_and_push $py $cpu_base $base_image_tag scipy
+
+	for image_name in pycaret auto-sklearn
+	do
+		build_and_push $py $base_image_tag zhushaojun/$image_name:py$py-cpu $image_name
 	done
 done
