@@ -25,7 +25,9 @@ tag_and_push_image() {
 	docker push $private_registry$1
 }
 
+# https://hub.docker.com/_/ubuntu?tab=tags&page=1
 cpu_base=ubuntu:20.04
+# https://hub.docker.com/r/nvidia/cuda/tags
 gpu_base=nvidia/cuda:11.4.2-cudnn8-runtime-ubuntu20.04
 
 build_and_push() {

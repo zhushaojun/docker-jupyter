@@ -22,6 +22,8 @@ USER root
 ENV DEBIAN_FRONTEND noninteractive
 
 RUN sed -i 's/archive.ubuntu.com/opentuna.cn/g' /etc/apt/sources.list && \
+    sed -i 's/security.ubuntu.com/opentuna.cn/g' /etc/apt/sources.list && \
+    rm -f /etc/apt/sources.list.d/cuda.list && \
     apt-get update --yes && \
     apt-get install --yes --no-install-recommends \
     tini \
