@@ -208,6 +208,8 @@ CMD ["start-notebook.sh"]
 COPY start.sh start-notebook.sh start-singleuser.sh /usr/local/bin/
 # Currently need to have both jupyter_notebook_config and jupyter_server_config to support classic and lab
 COPY jupyter_notebook_config.py /etc/jupyter/
+COPY --chown=${NB_UID}:${NB_GID} .vimrc /home/${NB_USER}/
+
 
 # Fix permissions on /etc/jupyter as root
 USER root
