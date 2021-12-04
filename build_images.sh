@@ -3,7 +3,8 @@
 # cuda_version=(11.4.2-cudnn8-runtime-ubuntu20.04
 # https://hub.docker.com/r/nvidia/cuda/tags
 
-#构建以前删除镜像
+#构建以前清理容器和镜像
+docker container prune -f
 docker image prune -a -f
 
 chmod +x scipy/*.sh
@@ -56,4 +57,11 @@ do
 	do
 		build_and_push $py $base_image_tag zhushaojun/$image_name:py$py-cpu $image_name
 	done
+done
+
+
+# push all images again
+for image in mxnet pytorch tensorflow pycaret auto-sklearn
+do
+	docker image push --all-tags zhushaojun/$image
 done

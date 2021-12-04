@@ -7,7 +7,7 @@ FROM ${ROOT_CONTAINER}
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 # Install pycaret
-RUN mamba install --yes -c conda-forge \
+RUN mamba install --yes --quiet -c conda-forge \
     shap && \
     pip install daal4py pycaret[full]  --no-cache-dir && \
     rm -fr ~/.cache/pip && \

@@ -7,12 +7,7 @@ FROM ${ROOT_CONTAINER}
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 # Install mxnet and autogluon
-RUN mamba install --yes -c pytorch \
-    'pytorch' \
-    'torchvision' \
-    'cudatoolkit=10.2' && \
-    mamba clean --all -f -y && \
-    pip install mxnet-cu102==1.7.0 --no-cache-dir && \
+RUN pip install torch torchvision mxnet-cu102==1.7.0 --no-cache-dir && \
     pip install autogluon --no-cache-dir && \
     rm -fr ~/.cache/pip && \
     fix-permissions "${CONDA_DIR}" && \

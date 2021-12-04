@@ -130,7 +130,7 @@ RUN set -x && \
     if [[ "${PYTHON_VERSION}" != "default" ]]; then mamba install --yes python="${PYTHON_VERSION}"; fi && \
     mamba list python | grep '^python ' | tr -s ' ' | cut -d ' ' -f 1,2 >> "${CONDA_DIR}/conda-meta/pinned" && \
     # Using conda to update all packages: https://github.com/mamba-org/mamba/issues/1092
-    conda update --all --yes && \
+    conda update --quiet --all --yes && \
     conda clean --all -f -y && \
     rm -rf "/home/${NB_USER}/.cache/yarn" && \
     fix-permissions "${CONDA_DIR}" && \
@@ -142,7 +142,7 @@ RUN set -x && \
 # Correct permissions
 # Do all this in a single RUN command to avoid duplicating all of the
 # files across image layers when the permissions change
-RUN mamba install --yes \
+RUN mamba install --quiet --yes \
     'notebook' \
     'jupyterhub' \
     'jupyterlab' \
