@@ -12,7 +12,7 @@ RUN mamba install --yes  --quiet -c pytorch \
     'torchvision' \
     'cudatoolkit=10.2' && \
     mamba clean --all -f -y && \
-    pip install mxnet-cu102==1.7.0 --no-cache-dir && \
+    pip install mxnet-cu102 --no-cache-dir && \
     pip install autogluon --no-cache-dir && \
     rm -fr ~/.cache/pip && \
     fix-permissions "${CONDA_DIR}" && \
