@@ -110,7 +110,7 @@ WORKDIR /tmp
 # For example, people from mainland China could set it as
 # https://mirrors.tuna.tsinghua.edu.cn/github-release/conda-forge/miniforge/LatestRelease
 # ARG CONDA_MIRROR=https://github.com/conda-forge/miniforge/releases/latest/download
-ARG CONDA_MIRROR=https://mirrors.tuna.tsinghua.edu.cn/github-release/conda-forge/miniforge/LatestRelease
+ARG CONDA_MIRROR=https://mirrors.bfsu.edu.cn/github-release/conda-forge/miniforge/LatestRelease
 
 # ---- Miniforge installer ----
 # Check https://github.com/conda-forge/miniforge/releases

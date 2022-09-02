@@ -37,7 +37,7 @@ build_and_push() {
 }
 
 # gpu notebook
-for py in 3.7 3.8 3.9
+for py in 3.8 3.9 3.10
 do
 	base_image_tag=zhushaojun/scipy:py$py-gpu
 	build_and_push $py $gpu_base $base_image_tag scipy
@@ -50,7 +50,7 @@ done
 
 
 # cpu notebook
-for py in 3.7 3.8 3.9
+for py in 3.8 3.9 3.10
 do
 	base_image_tag=zhushaojun/scipy:py$py-cpu
 	build_and_push $py $cpu_base $base_image_tag scipy
